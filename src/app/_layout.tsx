@@ -5,6 +5,7 @@ import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { useFonts } from 'expo-font';
 
 import { SplashScreen, Stack } from 'expo-router';
+import { Tabs } from 'expo-router/tabs';
 
 import { GluestackUIProvider } from '@gluestack-ui/themed';
 import { config } from "@gluestack-ui/config";
@@ -52,6 +53,8 @@ function RootLayoutNav() {
         <GluestackUIProvider config={config}>
             <Stack>
                 <Stack.Screen name="index" options={{ headerShown: false }} />
+
+                <Tabs.Screen name="(tabs)" options={{ title: 'Diocese de Santos' }} />
             </Stack>
         </GluestackUIProvider>
     );
