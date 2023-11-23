@@ -8,6 +8,8 @@ import {
 import { EventoType } from "@/api/types/EventoTypes";
 
 export default function EventoCard({ evento }: EventoType) {
+    const toDate = (date: string) => date?.split('-').reverse().join('/') || 'Sem Data';
+
     return (
         <Box bg="#D1D1D1" p="$1" m="$4" style={{ borderRadius: 20 }}>
             <View p="$4" m="$4">
@@ -22,9 +24,7 @@ export default function EventoCard({ evento }: EventoType) {
                     top: 0,
                     right: 0
                 }}>
-                    {evento?.data.getDay()}/
-                    {evento?.data.getMonth()}/
-                    {evento?.data.getFullYear()}
+                    {toDate(evento?.data)}
                     {' ás '}
                     {evento?.horario}
                 </Text>

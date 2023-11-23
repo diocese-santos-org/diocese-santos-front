@@ -3,7 +3,7 @@ export interface ParoquiaType {
     distancia: number;
 }
 
-interface Paroquia {
+export interface Paroquia {
     id: number;
     nome: string;
     endereco: Endereco;

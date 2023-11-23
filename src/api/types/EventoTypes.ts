@@ -3,5 +3,5 @@ export interface EventoType {
     descricao: string;
     horario: string;
     local: string;
-    data: Date;
+    data: string;
 }

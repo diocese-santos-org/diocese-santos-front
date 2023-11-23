@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
+import { Text } from "react-native";
 import { FlatList } from 'react-native-gesture-handler';
 
 import {
     Center,
     View,
-    Text,
     Divider
 } from "@gluestack-ui/themed";
 
@@ -15,10 +15,13 @@ import { getParoquias } from "@/api/DioceseSantosAPI";
 
 export default function ParoquiasScreen() {
     const [paroquias, setParoquias] = useState<ParoquiaType[]>([]);
+    const [error, setError] = useState<any>();
 
     useEffect(() => {
         const load = async () => {
-            setParoquias(await getParoquias());
+            getParoquias()
+                .then(response => setParoquias(response))
+                .catch(error => setError(error));
         }
         load();
     }, []);
@@ -26,6 +29,10 @@ export default function ParoquiasScreen() {
     return (
         <View>
             <Center justifyContent="center">
+                {
+                    error &&
+                    <Text>{error.message}</Text>
+                }
                 {
                     paroquias &&
                     <FlatList

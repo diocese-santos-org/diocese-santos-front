@@ -29,42 +29,46 @@ export default function MapaScreen() {
     const [errorMsg, setErrorMsg] = useState<string | null>(null);
     const [paroquias, setParoquias] = useState<ParoquiaType[]>([])
 
-    async function requestLocationPermissions() {
-        try {
-            const { status } = await requestForegroundPermissionsAsync();
+    function requestLocationPermissions() {
+        requestForegroundPermissionsAsync()
+            // .then(response => console.log(
+            //     'requestForegroundPermissionsAsync: ' +
+            //     JSON.stringify(response)
+            // ))
+            .catch(error => console.log(
+                'requestForegroundPermissionsAsync[error]: ' +
+                error
+            ));
 
-            if (status !== 'granted') {
-                setErrorMsg('Permission to access location was denied');
-                return;
-            }
-
-            setLocation(await getCurrentPositionAsync({}));
-        } catch (error) {
-            console.log(error);
-        }
+        getCurrentPositionAsync({})
+            .then(response => setLocation(response))
+            .catch(error => console.log(
+                'getCurrentPositionAsync[error]: ' +
+                error
+            ));
     }
 
     useEffect(() => {
-        try {
-            requestLocationPermissions();
+        requestLocationPermissions();
 
-            watchPositionAsync({
-                accuracy: LocationAccuracy.High,
-                timeInterval: 1000,
-                distanceInterval: 1,
-            }, (location) => {
-                setLocation(location);
-            });
-        } catch (error) {
-            console.log(error);
-        }
+        watchPositionAsync({
+            accuracy: LocationAccuracy.High,
+            timeInterval: 1000,
+            distanceInterval: 1,
+        }, (location) => {
+            setLocation(location);
+        })
+            .catch(error => console.log(
+                'watchPositionAsync[error]: ' +
+                error
+            ));
     }, []);
 
     useEffect(() => {
         (async () => {
-            const paroquias = await getParoquias();
-
-            setParoquias(paroquias);
+            getParoquias()
+                .then(response => setParoquias(response))
+                .catch(error => console.log(error));
         })();
     }, [])
 

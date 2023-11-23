@@ -16,10 +16,13 @@ import { getAvisos } from "@/api/DioceseSantosAPI";
 
 export default function AvisosScreen() {
     const [avisos, setAvisos] = useState<AvisoType[]>([]);
+    const [error, setError] = useState<any>();
 
     useEffect(() => {
         const load = async () => {
-            setAvisos(await getAvisos());
+            getAvisos()
+                .then(response => setAvisos(response))
+                .catch(error => setError(error));
         }
         load();
     }, []);
@@ -27,6 +30,10 @@ export default function AvisosScreen() {
     return (
         <View>
             <Center justifyContent="center">
+                {
+                    error &&
+                    <Text>{error.message}</Text>
+                }
                 {
                     avisos &&
                     <FlatList

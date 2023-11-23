@@ -1,56 +1,61 @@
-import { ParoquiaType } from "@/api/types/ParoquiaTypes";
-import { mockParoquias } from "@/api/mocks/paroquias";
+import axios from 'axios';
+
+import { Paroquia, ParoquiaType } from "@/api/types/ParoquiaTypes";
 
 import { AvisoType } from "@/api/types/AvisoTypes";
-import { mockAvisos } from "@/api/mocks/avisos";
 
 import { EventoType } from "@/api/types/EventoTypes";
-import { mockEventos } from "@/api/mocks/eventos";
 
-const urlBase = process.env.EXPO_PUBLIC_API_URL || '';
-
-export const getParoquias = async (latitude: number | null = null, longitude: number | null = null): Promise<ParoquiaType[]> => {
-    if (!!process.env.EXPO_PUBLIC_API_MOCK) {
-        return mockParoquias;
+const api = axios.create({
+    baseURL: process.env.EXPO_PUBLIC_API_URL,
+    headers: {
+        Authorization: 'Bearer ' + process.env.EXPO_PUBLIC_API_TOKEN
     }
+});
 
+export const getParoquias = async (
+    latitude: number | null = null,
+    longitude: number | null = null
+): Promise<ParoquiaType[]> => {
     const coordinates = {
-        latitude: latitude || process.env.EXPO_PUBLIC_LATITUDE || -23.938525,
-        longitude: longitude || process.env.EXPO_PUBLIC_LONGITUDE || -46.418176
+        latitude: latitude || process.env.EXPO_PUBLIC_LATITUDE,
+        longitude: longitude || process.env.EXPO_PUBLIC_LONGITUDE
     }
 
-    const response = await fetch(`${urlBase}/paroquia?latitude=${coordinates.latitude}&longitude=${coordinates.longitude}`);
-    const data = await response.json();
+    let response;
+    if (coordinates.latitude !== null && coordinates.longitude !== null) {
+        response = await api.get<ParoquiaType[]>('paroquias/geo', {
+            params: { ...coordinates }
+        }).catch(error => console.log(
+            'paroquias/geo[error]: ' +
+            error
+        ));
+    }
 
-    return data;
+    if (!response) {
+        response = await api.get<ParoquiaType[]>('paroquias')
+            .catch(error => console.log(
+                'paroquias[error]: ' + error
+            ));
+    }
+
+    return response?.data || [];
 }
 
-export const getParoquia = async (id: string = '1') => {
-    if (!!process.env.EXPO_PUBLIC_API_MOCK) {
-        return mockParoquias[0];
-    }
+export const getParoquia = async (id: string = '1'): Promise<Paroquia> => {
+    const response = await api.get<Paroquia>(`paroquias/${id}`);
 
-    const response = await fetch(`${urlBase}/paroquia/${id}`);
-
-    return await response.json();
+    return response?.data || [];
 }
 
 export const getAvisos = async (): Promise<AvisoType[]> => {
-    if (!!process.env.EXPO_PUBLIC_API_MOCK) {
-        return mockAvisos;
-    }
+    const response = await api.get<AvisoType[]>(`comunicados`);
 
-    return new Promise(() => {
-        return [];
-    });
+    return response?.data || [];
 }
 
 export const getEventos = async (): Promise<EventoType[]> => {
-    if (!!process.env.EXPO_PUBLIC_API_MOCK) {
-        return mockEventos;
-    }
+    const response = await api.get<EventoType[]>(`eventos`);
 
-    return new Promise(() => {
-        return [];
-    });
+    return response?.data || [];
 }
