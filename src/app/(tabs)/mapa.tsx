@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import FontAwesome from '@expo/vector-icons/FontAwesome5';
 
 import {
     View,
@@ -14,6 +15,9 @@ import {
     LocationAccuracy
 } from 'expo-location';
 
+import { getParoquias } from '@/api/DioceseSantosAPI';
+import { ParoquiaType } from '@/api/types/ParoquiaTypes';
+
 export default function MapaScreen() {
     const [location, setLocation] = useState<LocationObject | null>(null);
     const [region, setRegion] = useState<Region>({
@@ -23,6 +27,7 @@ export default function MapaScreen() {
         longitudeDelta: 0.0421,
     });
     const [errorMsg, setErrorMsg] = useState<string | null>(null);
+    const [paroquias, setParoquias] = useState<ParoquiaType[]>([])
 
     async function requestLocationPermissions() {
         try {
@@ -49,16 +54,20 @@ export default function MapaScreen() {
                 distanceInterval: 1,
             }, (location) => {
                 setLocation(location);
-                setRegion({
-                    ...region,
-                    latitude: location.coords.latitude,
-                    longitude: location.coords.longitude,
-                })
             });
         } catch (error) {
             console.log(error);
         }
     }, []);
+
+    useEffect(() => {
+        (async () => {
+            const paroquias = await getParoquias();
+
+            setParoquias(paroquias);
+        })();
+    }, [])
+
 
     return (
         <View>
@@ -76,7 +85,21 @@ export default function MapaScreen() {
                     <Marker coordinate={{
                         latitude: location.coords.latitude,
                         longitude: location.coords.longitude,
-                    }} />
+                        }} title='Você'>
+                        </Marker>
+
+                        {
+                            paroquias &&
+                            paroquias.map(
+                                (paroquia) =>
+                                    <Marker key={paroquia.paroquia.id} title={paroquia.paroquia.nome} coordinate={{
+                                        latitude: paroquia.paroquia.endereco.latitude,
+                                        longitude: paroquia.paroquia.endereco.longitude,
+                                    }}>
+                                        <FontAwesome name='church' color={'#000'} size={25} />
+                                    </Marker>
+                            )
+                        }
                 </MapView>
             }
         </View>

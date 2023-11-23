@@ -46,8 +46,11 @@ export default function TabsLayout() {
                 }}
             />
             <Tabs.Screen
-                name="paroquia/show"
-                options={{ href: null }}
+                name="paroquia/[id]"
+                options={{
+                    href: null,
+                    headerShown: false
+                }}
             />
         </Tabs>
     </GluestackUIProvider>;

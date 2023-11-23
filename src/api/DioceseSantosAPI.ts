@@ -25,6 +25,16 @@ export const getParoquias = async (latitude: number | null = null, longitude: nu
     return data;
 }
 
+export const getParoquia = async (id: string = '1') => {
+    if (!!process.env.EXPO_PUBLIC_API_MOCK) {
+        return mockParoquias[0];
+    }
+
+    const response = await fetch(`${urlBase}/paroquia/${id}`);
+
+    return await response.json();
+}
+
 export const getAvisos = async (): Promise<AvisoType[]> => {
     if (!!process.env.EXPO_PUBLIC_API_MOCK) {
         return mockAvisos;
