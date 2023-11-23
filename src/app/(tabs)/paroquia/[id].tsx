@@ -19,7 +19,7 @@ export default function ParoquiasScreen() {
 
     useEffect(() => {
         const load = async () => {
-            getParoquia(id)
+            getParoquia(String(id))
                 .then(response => setParoquia(response))
                 .catch(error => console.log(
                     `getParoquia(${id})[error]: ` +
@@ -27,7 +27,6 @@ export default function ParoquiasScreen() {
                 ));
         }
         load();
-        console.log(paroquia);
     }, [])
 
     const isNull = (value: any) => value === 'NULL' ? null : value;

@@ -24,8 +24,6 @@ export default function EventosScreen() {
                 .catch(error => setError(error));
         }
         load();
-        console.log(eventos[0]);
-
     }, []);
 
     return (
@@ -39,9 +37,7 @@ export default function EventosScreen() {
                     eventos &&
                     <FlatList
                         data={eventos}
-                        ItemSeparatorComponent={
-                            () => <Divider />
-                        }
+                        ItemSeparatorComponent={() => <Divider />}
                         renderItem={({ item }) =>
                             <EventoCard
                                 key={item.titulo}
