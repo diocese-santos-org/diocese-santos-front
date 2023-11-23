@@ -11,7 +11,7 @@ import { ParoquiaType } from "@/api/types/ParoquiaTypes";
 
 export default function ParoquiaCard({ paroquia, distancia }: ParoquiaType) {
     return (
-        <Box bg="#D1D1D1" p="$4" m="$4" style={{ borderRadius: 20 }}>
+        <Box bg="#D1D1D1" p="$4" m="$4" style={{ borderRadius: 20 }} key={paroquia.id}>
             <Link
                 href={{
                     pathname: "/(tabs)/paroquia/[id]",

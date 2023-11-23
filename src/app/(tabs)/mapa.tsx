@@ -1,9 +1,11 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import { FlatList } from 'react-native-gesture-handler';
 import FontAwesome from '@expo/vector-icons/FontAwesome5';
 
 import {
     View,
-    Text
+    Text,
+    Divider
 } from "@gluestack-ui/themed";
 
 import MapView, { Marker, Region } from 'react-native-maps';
@@ -17,8 +19,10 @@ import {
 
 import { getParoquias } from '@/api/DioceseSantosAPI';
 import { ParoquiaType } from '@/api/types/ParoquiaTypes';
+import { Pressable } from 'react-native';
 
 export default function MapaScreen() {
+    const mapRef = useRef<MapView>(null);
     const [location, setLocation] = useState<LocationObject | null>(null);
     const [region, setRegion] = useState<Region>({
         latitude: location?.coords.latitude || -23.9562553,
@@ -82,16 +86,17 @@ export default function MapaScreen() {
             {
                 location &&
                 <MapView
-                    style={{ height: '100%', width: '100%' }}
-                    region={region}
-                    onRegionChangeComplete={(region: Region) => setRegion(region)}
-                >
-                    <Marker coordinate={{
-                        latitude: location.coords.latitude,
-                        longitude: location.coords.longitude,
-                        }} title='Você'>
-                        </Marker>
-
+                        ref={mapRef}
+                        showsUserLocation={true}
+                        onRegionChangeComplete={
+                            (region: Region) => setRegion(region)
+                        }
+                        onMarkerPress={
+                            (event) => console.log(event.nativeEvent)
+                        }
+                        style={{ height: '100%', width: '100%' }}
+                        region={region}
+                    >
                         {
                             paroquias &&
                             paroquias.map(
@@ -105,6 +110,47 @@ export default function MapaScreen() {
                             )
                         }
                 </MapView>
+            }
+            {
+                <View style={{ position: 'absolute', maxHeight: 200, width: '90%', bottom: 0, left: 0, margin: '5%', backgroundColor: '#fff', padding: 20 }}>
+                    <FlatList
+                        data={paroquias}
+                        ItemSeparatorComponent={
+                            () => <Divider marginVertical={10} />
+                        }
+                        renderItem={({ item }) => (
+                            <Pressable
+                                onPress={
+                                    () => mapRef.current?.animateToRegion({
+                                        latitude: item.paroquia.endereco.latitude,
+                                        longitude: item.paroquia.endereco.longitude,
+                                        latitudeDelta: 0.0043,
+                                        longitudeDelta: 0.0034
+                                    }, 1000)
+                                }
+                                style={{
+                                    flexDirection: 'row',
+                                    alignItems: 'center',
+                                    gap: 10
+                                }}
+                            >
+                                <FontAwesome
+                                    name='church'
+                                    color={'#000'}
+                                    size={20}
+                                />
+                                <Text style={{
+                                    fontSize: 18,
+                                    fontWeight: 'bold',
+                                    width: '90%',
+                                    flexWrap: 'wrap',
+                                }}>
+                                    {item.paroquia.nome}
+                                </Text>
+                            </Pressable>
+                        )}
+                    />
+                </View>
             }
         </View>
     );
