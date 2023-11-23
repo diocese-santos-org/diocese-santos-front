@@ -5,7 +5,8 @@ import FontAwesome from '@expo/vector-icons/FontAwesome5';
 import {
     View,
     Text,
-    Divider
+    Divider,
+    Center
 } from "@gluestack-ui/themed";
 
 import MapView, { Marker, Region } from 'react-native-maps';
@@ -35,21 +36,15 @@ export default function MapaScreen() {
 
     function requestLocationPermissions() {
         requestForegroundPermissionsAsync()
-            // .then(response => console.log(
-            //     'requestForegroundPermissionsAsync: ' +
-            //     JSON.stringify(response)
-            // ))
-            .catch(error => console.log(
-                'requestForegroundPermissionsAsync[error]: ' +
-                error
-            ));
+            .catch(error =>
+                setErrorMsg('Habilite a permissão de localização! \n\nEncontre os locais mais próximos de você!')
+            );
 
         getCurrentPositionAsync({})
             .then(response => setLocation(response))
-            .catch(error => console.log(
-                'getCurrentPositionAsync[error]: ' +
-                error
-            ));
+            .catch(error =>
+                setErrorMsg('Habilite a permissão de localização! \n\nEncontre os locais mais próximos de você!')
+            );
     }
 
     useEffect(() => {
@@ -62,10 +57,9 @@ export default function MapaScreen() {
         }, (location) => {
             setLocation(location);
         })
-            .catch(error => console.log(
-                'watchPositionAsync[error]: ' +
-                error
-            ));
+            .catch(error =>
+                setErrorMsg('Habilite a permissão de localização! \n\nEncontre os locais mais próximos de você!')
+            );
     }, []);
 
     useEffect(() => {
@@ -81,7 +75,10 @@ export default function MapaScreen() {
         <View>
             {
                 errorMsg &&
-                <Text>{errorMsg}</Text>
+                <Center h='$full'>
+                    <FontAwesome name='globe' color={'#000'} size={100} />
+                    <Text mt={20} fontSize={20} fontWeight='bold'>{errorMsg}</Text>
+                </Center>
             }
             {
                 location &&
@@ -112,6 +109,7 @@ export default function MapaScreen() {
                 </MapView>
             }
             {
+                location &&
                 <View style={{ position: 'absolute', maxHeight: 200, width: '90%', bottom: 0, left: 0, margin: '5%', backgroundColor: '#fff', padding: 20 }}>
                     <FlatList
                         data={paroquias}
