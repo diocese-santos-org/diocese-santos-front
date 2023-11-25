@@ -1,8 +1,8 @@
 import {
-    View,
     Box,
     Heading,
-    Text
+    Text,
+    VStack
 } from "@gluestack-ui/themed";
 
 import { Link } from "expo-router";
@@ -20,14 +20,19 @@ export default function ParoquiaCard({ paroquia, distancia }: ParoquiaType) {
                     }
                 }}
             >
-                <Heading size='md'>
-                    {paroquia?.nome || 'Nome da Paróquia'}
-                </Heading>
-                <Text pt="$3" style={{ textAlign: 'right' }}>{
-                    distancia
-                        ? distancia.toFixed(0) + ' metros'
-                        : 'Distância da Paróquia'
-                }</Text>
+                <VStack>
+                    <Text>
+                        {
+                            distancia
+                                ? distancia.toFixed(0) + ' metros'
+                                : 'Distância da Paróquia'
+                        }
+                    </Text>
+                    <Heading size="sm">
+                        {paroquia?.nome || 'Nome da Paróquia'}
+                    </Heading>
+                </VStack>
+
             </Link>
         </Box>
     );
