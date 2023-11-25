@@ -122,13 +122,16 @@ export default function MapaScreen() {
             </Pressable>
             {
                 selectedRoute === paroquia.paroquia.id &&
-                <Link href="" asChild>
-                <Button size="lg" variant="solid">
-                    <ButtonText>Ver Rotas</ButtonText>
-                </Button>
-            </Link>
+                <Link href={getMapsUrl(paroquia.paroquia.nome)} asChild>
+                    <Button size="lg" variant="solid">
+                        <ButtonText>Ver Rotas</ButtonText>
+                    </Button>
+                </Link>
             }
         </View>
+
+    const getMapsUrl = (name: string) => `https://www.google.com/maps/dir/${location?.coords.latitude},${location?.coords.longitude}/${encodeURI(name)}
+
     return (
         <View>
             {
