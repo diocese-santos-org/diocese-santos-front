@@ -12,6 +12,7 @@ import EventoCard from "@/components/Evento";
 
 import { EventoType } from "@/api/types/EventoTypes";
 import { getEventos } from "@/api/DioceseSantosAPI";
+import {ActivityIndicator} from "react-native";
 
 export default function EventosScreen() {
     const [eventos, setEventos] = useState<EventoType[]>([]);
@@ -32,6 +33,12 @@ export default function EventosScreen() {
                 {
                     error &&
                     <Text>{error.message}</Text>
+                }
+                {
+                    eventos.length == 0 &&
+                    <Center h={"$full"}>
+                        <ActivityIndicator size={"large"}/>
+                    </Center>
                 }
                 {
                     eventos &&

@@ -20,7 +20,7 @@ import {
 
 import { getParoquias } from '@/api/DioceseSantosAPI';
 import { ParoquiaType } from '@/api/types/ParoquiaTypes';
-import { Pressable } from 'react-native';
+import {ActivityIndicator, Pressable} from 'react-native';
 import {Link} from "expo-router";
 
 export default function MapaScreen() {
@@ -136,9 +136,10 @@ export default function MapaScreen() {
         <View>
             {
                 errorMsg &&
-                <Center h='$full'>
-                    <FontAwesome name='globe' color={'#000'} size={100} />
-                    <Text mt={20} fontSize={20} fontWeight='bold'>{errorMsg}</Text>
+
+                <Center style={{ position: 'absolute', left: 20, paddingBottom: 40, top: 180 }}>
+                    <FontAwesome name='globe' color={'#000'} size={50} />
+                    <Text mt={20} fontSize={20} fontWeight='bold' color={'#000'}>{errorMsg}</Text>
                 </Center>
             }
             {
