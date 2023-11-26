@@ -50,6 +50,18 @@ Certifique-se de ter os seguintes itens abaixos estão instalados em sua máquin
 
 4. Crie um arquivo **.env.local** usando como exemplo o [.env.example](./.env.example) com as informações especificadas nele.
 
+
+5. Usar o backend: Baixar o NGROK extrair e rodar o app gerado.
+
+    Com o terminal do aplicativo rodando, digitar o comando: 
+ngrok.exe http 8080
+
+    Após isso, copiar o ip gerado, exemplo:  https://ebfd-2804-431-cfe9-48ed-3d45-c9d5-9851-4cec.ngrok.io
+
+    e colar na variavel do arquivo .env.local: EXPO_PUBLIC_API_URL
+
+
+
 ## Uso
 
 1. Inicie o servidor de desenvolvimento do Expo com o comando: 
