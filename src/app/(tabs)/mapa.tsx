@@ -130,7 +130,7 @@ export default function MapaScreen() {
             }
         </View>
 
-    const getMapsUrl = (name: string) => `https://www.google.com/maps/dir/${location?.coords.latitude},${location?.coords.longitude}/${encodeURI(name)}
+    const getMapsUrl = (name: string) => `https://www.google.com/maps/dir/${location?.coords.latitude},${location?.coords.longitude}/${encodeURI(name)}`
 
     return (
         <View>
