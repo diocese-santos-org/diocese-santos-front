@@ -65,7 +65,7 @@ export const getAvisos = async (): Promise<AvisoType[]> => {
         return mockAvisos;
     }
 
-    const response = await api.get<AvisoType[]>(`comunicados`);
+    const response = await api.get<AvisoType[]>(`avisos`);
 
     return response?.data || [];
 }

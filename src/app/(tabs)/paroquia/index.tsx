@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Text } from "react-native";
+import {ActivityIndicator, Text} from "react-native";
 import { FlatList } from 'react-native-gesture-handler';
 
 import {
@@ -32,6 +32,12 @@ export default function ParoquiasScreen() {
                 {
                     error &&
                     <Text>{error.message}</Text>
+                }
+                {
+                    paroquias.length == 0 &&
+                    <Center h={"$full"}>
+                        <ActivityIndicator size={"large"}/>
+                    </Center>
                 }
                 {
                     paroquias &&

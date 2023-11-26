@@ -13,6 +13,7 @@ import AvisoCard from "@/components/Aviso";
 
 import { AvisoType } from "@/api/types/AvisoTypes";
 import { getAvisos } from "@/api/DioceseSantosAPI";
+import {ActivityIndicator} from "react-native";
 
 export default function AvisosScreen() {
     const [avisos, setAvisos] = useState<AvisoType[]>([]);
@@ -33,6 +34,12 @@ export default function AvisosScreen() {
                 {
                     error &&
                     <Text>{error.message}</Text>
+                }
+                {
+                    avisos.length == 0 &&
+                    <Center h={"$full"}>
+                        <ActivityIndicator size={"large"}/>
+                    </Center>
                 }
                 {
                     avisos &&
