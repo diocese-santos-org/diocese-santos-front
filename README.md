@@ -61,7 +61,6 @@ ngrok.exe http 8080
     e colar na variavel do arquivo .env.local: EXPO_PUBLIC_API_URL
 
 
-
 ## Uso
 
 1. Inicie o servidor de desenvolvimento do Expo com o comando: 
@@ -79,5 +78,5 @@ ngrok.exe http 8080
    r
    ```
 
-
+    E para visualizar as requisições, abrir: http://localhost:4040
 6. Agora você pode utilizar a Diocese Santos!
