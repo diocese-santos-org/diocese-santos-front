@@ -4,7 +4,7 @@ Aplicativo da Diocese de Santos com as paróquias mais perto de você, avisos e 
 
 # Link Importantes
 - ORG do projeto: [Diocese Santos - ORG](https://github.com/diocese-santos-org)
-- Front-End do projeto: [Diocese Santos - Wiki](https://github.com/diocese-santos-org/diocese-santos-wiki/wiki)
+- Wiki do projeto: [Diocese Santos - Wiki](https://github.com/diocese-santos-org/diocese-santos-wiki/wiki)
 - Back-End do projeto: [Diocese Santos - Back-End](https://github.com/diocese-santos-org/diocese-santos-backend)
 
 ## Integrantes
