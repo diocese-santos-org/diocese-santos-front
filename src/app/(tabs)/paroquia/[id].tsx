@@ -71,10 +71,6 @@ export default function ParoquiasScreen() {
                 href={isNull(paroquia?.redesSociais?.youtube)}
             />
             <Social
-                iconName='envelope'
-                href={isNull(paroquia?.email) ? `mailto:${paroquia?.email}` : ''}
-            />
-            <Social
                 iconName='globe'
                 href={isNull(paroquia?.urlSite)}
             />
@@ -168,6 +164,17 @@ export default function ParoquiasScreen() {
             }
         </ScrollView>
 
+    const Email = () =>
+        <ScrollView margin='$4'>
+            {
+                paroquia?.email &&
+                <>
+                    <Text bold>Email:</Text>
+                    <Text>{isNull(paroquia?.email)}</Text>
+                </>
+            }
+        </ScrollView>
+
     return (
         <>
         {
@@ -189,6 +196,8 @@ export default function ParoquiasScreen() {
                     <Clero/>
 
                     <Contatos/>
+
+                    <Email/>
 
                     {/* <Text pt="$4">{distancia
                         ? distancia.toFixed(0) + ' metros'

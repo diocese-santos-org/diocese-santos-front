@@ -49,7 +49,8 @@ export default function TabsLayout() {
                 name="paroquia/[id]"
                 options={{
                     href: null,
-                    headerShown: false
+                    headerShown: false,
+                    unmountOnBlur: true
                 }}
             />
         </Tabs>
