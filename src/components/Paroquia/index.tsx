@@ -8,6 +8,7 @@ import {
 import { Link } from "expo-router";
 
 import { ParoquiaType } from "@/api/types/ParoquiaTypes";
+import {useEffect} from "react";
 
 export default function ParoquiaCard({ paroquia, distancia }: ParoquiaType) {
     return (

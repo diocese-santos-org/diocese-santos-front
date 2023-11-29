@@ -10,27 +10,37 @@ import {
     VStack
 } from "@gluestack-ui/themed";
 
-import { Link, useLocalSearchParams } from 'expo-router';
+import {Link, useFocusEffect, useLocalSearchParams} from 'expo-router';
 
 import { getParoquia } from '@/api/DioceseSantosAPI';
 import { Paroquia } from '@/api/types/ParoquiaTypes';
+import {ActivityIndicator} from "react-native";
 
 export default function ParoquiasScreen() {
     const { id } = useLocalSearchParams();
 
     const [paroquia, setParoquia] = useState<Paroquia | null>(null);
 
-    useEffect(() => {
-        const load = async () => {
-            getParoquia(String(id))
-                .then(response => setParoquia(response))
-                .catch(error => console.log(
-                    `getParoquia(${id})[error]: ` +
-                    error
-                ));
-        }
+    const load = async () => {
+        getParoquia(String(id))
+            .then(response => {
+                console.log(response.id);
+                setParoquia(response)
+            })
+            .catch(error => console.log(
+                `getParoquia(${id})[error]: ` +
+                error
+            ));
+    }
+
+    /*useEffect(() => {
         load();
-    }, [])
+    }, []);
+    */
+    useFocusEffect(() => {
+        //setParoquia(null);
+        load();
+    })
 
     const isNull = (value: any) => value === 'NULL' ? null : value;
 
@@ -153,32 +163,45 @@ export default function ParoquiasScreen() {
 
     const Clero = () =>
         <ScrollView margin='$4'>
-            <Text bold>Clero:</Text>
             {
                 paroquia?.cleros &&
-                paroquia?.cleros?.map(
+                <>
+                <Text bold>Clero:</Text>
+                {paroquia?.cleros?.map(
                     clero => <Text key={clero?.nome} pt="$4">{clero?.nome}</Text>
-                )
+                )}
+                </>
             }
         </ScrollView>
 
     return (
-        <View key={paroquia?.id}>
-            <Center justifyContent="center" pt='$10'>
-                <Heading size='md'>{paroquia?.nome}</Heading>
+        <>
+        {
+            !paroquia &&
+                <Center h={"$full"}>
+                    <ActivityIndicator size={"large"}/>
+                </Center>
+        }
+        {
+            paroquia &&
+            <View key={paroquia?.id}>
+                <Center justifyContent="center" pt='$10'>
+                    <Heading size='md'>{paroquia?.nome}</Heading>
 
-                <Secretaria />
+                    <Secretaria/>
 
-                <Missas />
+                    <Missas/>
 
-                <Clero />
+                    <Clero/>
 
-                <Contatos />
+                    <Contatos/>
 
-                {/* <Text pt="$4">{distancia
-                    ? distancia.toFixed(0) + ' metros'
-                    : 'Distância da Paróquia'}</Text> */}
-            </Center>
-        </View>
+                    {/* <Text pt="$4">{distancia
+                        ? distancia.toFixed(0) + ' metros'
+                        : 'Distância da Paróquia'}</Text> */}
+                </Center>
+            </View>
+        }
+        </>
     );
 }
