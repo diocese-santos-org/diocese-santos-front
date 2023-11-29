@@ -97,7 +97,3 @@ ngrok.exe http 8080
 
     E para visualizar as requisições, abrir: http://localhost:4040
 6. Agora você pode utilizar a Diocese Santos!
-
-### Links Importantes
-- WIKI do projeto: https://github.com/diocese-santos-org/diocese-santos-wiki/wiki
-- Back-End do projeto: https://github.com/diocese-santos-org/diocese-santos-backend
