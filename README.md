@@ -36,12 +36,13 @@ Aplicativo da Diocese de Santos com as paróquias mais perto de você, avisos e 
 
 ## Capturas de Tela
 
-<img src="./screenshots/splash.png" alt="Mapa" width="150" />
-<img src="./screenshots/mapa.png" alt="Mapa" width="150" />
-<img src="./screenshots/paroquias.png" alt="Lista de Paróquias" width="150" />
-<img src="./screenshots/paroquia.png" alt="Informações da Paróquia" width="150" />
-<img src="./screenshots/eventos.png" alt="Lista de Eventos" width="150" />
-<img src="./screenshots/avisos.png" alt="Lista de Avisos" width="150" />
+<img src="https://github.com/diocese-santos-org/diocese-santos-front/blob/main/screenshots/Tela-Carregamento.jpeg" alt="TelaCarregamento" width="150" />
+<img src="https://github.com/diocese-santos-org/diocese-santos-front/blob/main/screenshots/Menu-Principal.jpeg" alt="MenuPrincipal" width="150" />
+<img src="https://github.com/diocese-santos-org/diocese-santos-front/blob/main/screenshots/Tela-Mapas.jpeg" alt="Mapa" width="150" />
+<img src="https://github.com/diocese-santos-org/diocese-santos-front/blob/main/screenshots/Tela-Paroquias.jpeg" alt="TelaParoquias" width="150" />
+<img src="https://github.com/diocese-santos-org/diocese-santos-front/blob/main/screenshots/Paroquia-Selecionada.jpeg" alt="ParoquiaSelecionada" width="150" />
+<img src="https://github.com/diocese-santos-org/diocese-santos-front/blob/main/screenshots/Tela-Eventos.jpeg" alt="TelaEventos" width="150" />
+<img src="https://github.com/diocese-santos-org/diocese-santos-front/blob/main/screenshots/Tela-Avisos.jpeg" alt="TelaAvisos" width="150" />
 
 ## Pré-requisitos
 
