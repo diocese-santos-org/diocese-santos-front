@@ -2,6 +2,11 @@
 
 Aplicativo da Diocese de Santos com as paróquias mais perto de você, avisos e eventos. Feito como projeto da Unisantos.
 
+# Link Importantes
+- ORG do projeto: [Diocese Santos - ORG](https://github.com/diocese-santos-org)
+- Front-End do projeto: [Diocese Santos - Wiki](https://github.com/diocese-santos-org/diocese-santos-wiki/wiki)
+- Back-End do projeto: [Diocese Santos - Back-End](https://github.com/diocese-santos-org/diocese-santos-backend)
+
 ## Integrantes
 > - Carlos Eduardo Lorenzetti Júnior
 > - Elián Roventini de Andrade - [Linkedin - Elián Andrade](https://www.linkedin.com/in/elianroventini/)
