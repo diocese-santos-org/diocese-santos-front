@@ -10,7 +10,7 @@ import {
     VStack
 } from "@gluestack-ui/themed";
 
-import {Link, useFocusEffect, useLocalSearchParams} from 'expo-router';
+import { Link, useLocalSearchParams, usePathname } from 'expo-router';
 
 import { getParoquia } from '@/api/DioceseSantosAPI';
 import { Paroquia } from '@/api/types/ParoquiaTypes';
@@ -18,29 +18,23 @@ import {ActivityIndicator} from "react-native";
 
 export default function ParoquiasScreen() {
     const { id } = useLocalSearchParams();
+    const pathname = usePathname();
 
     const [paroquia, setParoquia] = useState<Paroquia | null>(null);
 
     const load = async () => {
-        getParoquia(String(id))
-            .then(response => {
-                console.log(response.id);
-                setParoquia(response)
-            })
+        getParoquia(pathname?.split('/').pop() || String(id))
+            .then(response => setParoquia(response))
             .catch(error => console.log(
                 `getParoquia(${id})[error]: ` +
                 error
             ));
     }
 
-    /*useEffect(() => {
+    useEffect(() => {
+        setParoquia(null);
         load();
     }, []);
-    */
-    useFocusEffect(() => {
-        //setParoquia(null);
-        load();
-    })
 
     const isNull = (value: any) => value === 'NULL' ? null : value;
 
