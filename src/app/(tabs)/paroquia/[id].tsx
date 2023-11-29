@@ -169,7 +169,7 @@ export default function ParoquiasScreen() {
             {
                 paroquia?.email &&
                 <>
-                    <Text bold>Email:</Text>
+                    <Text bold>E-mail:</Text>
                     <Text>{isNull(paroquia?.email)}</Text>
                 </>
             }
