@@ -83,4 +83,5 @@ ngrok.exe http 8080
 6. Agora você pode utilizar a Diocese Santos!
 
 ### Links Importantes
-Link para WIKI do projeto: https://github.com/diocese-santos-org/diocese-santos-wiki
+- WIKI do projeto: https://github.com/diocese-santos-org/diocese-santos-wiki
+- Back-End do projeto: https://github.com/diocese-santos-org/diocese-santos-backend
