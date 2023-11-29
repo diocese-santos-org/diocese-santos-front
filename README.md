@@ -2,6 +2,22 @@
 
 Aplicativo da Diocese de Santos com as paróquias mais perto de você, avisos e eventos. Feito como projeto da Unisantos.
 
+# Link Importantes
+- ORG do projeto: [Diocese Santos - ORG](https://github.com/diocese-santos-org)
+- Wiki do projeto: [Diocese Santos - Wiki](https://github.com/diocese-santos-org/diocese-santos-wiki/wiki)
+- Back-End do projeto: [Diocese Santos - Back-End](https://github.com/diocese-santos-org/diocese-santos-backend)
+
+## Integrantes
+> - Carlos Eduardo Lorenzetti Júnior
+> - Elián Roventini de Andrade - [Linkedin - Elián Andrade](https://www.linkedin.com/in/elianroventini/)
+> - Gabriel Souza Recouso - [Linkedin - Gabriel Recouso](https://www.linkedin.com/in/gabrielrecouso/)
+> - Gustavo Lino Barbosa - [Linkedin - Gustavo Barbosa](https://www.linkedin.com/in/gustavobarb/)
+> - Lara Iasmine Pedroso Fabiano - [Linkedin - Lara Iasmine](https://www.linkedin.com/in/lara-iasmine-fabiano/)
+> - Leonardo Ribeiro Blume - [Linkedin - Leonardo Blume](https://www.linkedin.com/in/leonardo-blume-5484311b5/)
+> - Matheus La Scala Candido da Costa - [Linkedin - Matheus La Scala](https://www.linkedin.com/in/matheus-la-scala-1a1b091b0/)
+> - Tiago Samuel Sousa dos Santos - [Linkedin - Tiago Samuel](https://www.linkedin.com/in/tiagosts99)
+
+
 ## Índice
 
 - [Recursos](#recursos)
@@ -9,6 +25,7 @@ Aplicativo da Diocese de Santos com as paróquias mais perto de você, avisos e 
 - [Pré-requisitos](#pré-requisitos)
 - [Instalação](#instalação)
 - [Uso](#uso)
+- [Links Importantes](#links-importantes)
 
 ## Recursos
 
@@ -51,14 +68,28 @@ Certifique-se de ter os seguintes itens abaixos estão instalados em sua máquin
 4. Crie um arquivo **.env.local** usando como exemplo o [.env.example](./.env.example) com as informações especificadas nele.
 
 
-5. Usar o backend: Baixar o NGROK extrair e rodar o app gerado.
+5. Usar o backend, existem 2 (duas) opções:
+    ### 1 - Baixar o NGROK extrair e rodar o app gerado.
+	>Com o terminal do aplicativo rodando, digitar o comando: 
+	> ```
+ 	> ngrok.exe http 8080
+ 	> ```
+   	> Após isso, copiar o ip gerado, exemplo:  https://ebfd-2804-431-cfe9-48ed-3d45-c9d5-9851-4cec.ngrok.io
+   	> 	
+	> e colar na variável do arquivo .env.local: EXPO_PUBLIC_API_URL
+	> Com a token gerada na url:`{urlLocal}/token` cole na variável do arquivo .env.local: EXPO_PUBLIC_API_TOKEN
+   
+    ### 2 - Utilizar localhost.run
+	>Com o terminal do aplicativo rodando, abra outro terminal e digite o comando: 
+	> ```
+ 	> ssh -R 80:localhost:8080 nokey@localhost.run
+ 	> ```
+   	> Após isso, copiar o ip gerado, exemplo: https://ea28d87c2470dd.lhr.life
+   	> 	
+	> e colar na variável do arquivo .env.local: EXPO_PUBLIC_API_URL 
+	> Com a token gerada na url:`{urlLocal}/token` cole na variável do arquivo .env.local: EXPO_PUBLIC_API_TOKEN
 
-    Com o terminal do aplicativo rodando, digitar o comando: 
-ngrok.exe http 8080
-
-    Após isso, copiar o ip gerado, exemplo:  https://ebfd-2804-431-cfe9-48ed-3d45-c9d5-9851-4cec.ngrok.io
-
-    e colar na variavel do arquivo .env.local: EXPO_PUBLIC_API_URL
+Nota: a diferença entre as opções seria que o NGROK dura cerca de 2 horas o servidor. Já o localhost.run, por ser online, dura cerca de 30 minutos.
 
 
 
@@ -79,5 +110,5 @@ ngrok.exe http 8080
    r
    ```
 
-
+    E para visualizar as requisições, abrir: http://localhost:4040
 6. Agora você pode utilizar a Diocese Santos!

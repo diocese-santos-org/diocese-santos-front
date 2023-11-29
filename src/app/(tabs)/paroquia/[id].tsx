@@ -69,11 +69,10 @@ export default function ParoquiasScreen() {
             <Social
                 iconName='youtube'
                 href={isNull(paroquia?.redesSociais?.youtube)}
-            />
             <Social
                 iconName='globe'
                 href={isNull(paroquia?.urlSite)}
-            />
+                />
         </ScrollView>
 
     const Missas = () =>
@@ -198,13 +197,13 @@ export default function ParoquiasScreen() {
                     <Contatos/>
 
                     <Email/>
+                <Text bold >{isNull(paroquia?.email) ? paroquia?.email : ''}</Text>
 
-                    {/* <Text pt="$4">{distancia
-                        ? distancia.toFixed(0) + ' metros'
-                        : 'Distância da Paróquia'}</Text> */}
-                </Center>
-            </View>
-        }
-        </>
+
+                {/* <Text pt="$4">{distancia
+                    ? distancia.toFixed(0) + ' metros'
+                    : 'Distância da Paróquia'}</Text> */}
+            </Center>
+        </View>
     );
 }
