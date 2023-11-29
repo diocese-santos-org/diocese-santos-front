@@ -21,7 +21,6 @@ export default function ParoquiasScreen() {
     const pathname = usePathname();
 
     const [paroquia, setParoquia] = useState<Paroquia | null>(null);
-
     const load = async () => {
         getParoquia(pathname?.split('/').pop() || String(id))
             .then(response => setParoquia(response))
@@ -69,6 +68,7 @@ export default function ParoquiasScreen() {
             <Social
                 iconName='youtube'
                 href={isNull(paroquia?.redesSociais?.youtube)}
+            />
             <Social
                 iconName='globe'
                 href={isNull(paroquia?.urlSite)}
@@ -197,13 +197,14 @@ export default function ParoquiasScreen() {
                     <Contatos/>
 
                     <Email/>
-                <Text bold >{isNull(paroquia?.email) ? paroquia?.email : ''}</Text>
 
 
                 {/* <Text pt="$4">{distancia
                     ? distancia.toFixed(0) + ' metros'
                     : 'Distância da Paróquia'}</Text> */}
-            </Center>
-        </View>
+                </Center>
+            </View>
+        }
+        </>
     );
 }
