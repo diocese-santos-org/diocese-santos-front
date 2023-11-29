@@ -10,27 +10,31 @@ import {
     VStack
 } from "@gluestack-ui/themed";
 
-import { Link, useLocalSearchParams } from 'expo-router';
+import { Link, useLocalSearchParams, usePathname } from 'expo-router';
 
 import { getParoquia } from '@/api/DioceseSantosAPI';
 import { Paroquia } from '@/api/types/ParoquiaTypes';
+import {ActivityIndicator} from "react-native";
 
 export default function ParoquiasScreen() {
     const { id } = useLocalSearchParams();
+    const pathname = usePathname();
 
     const [paroquia, setParoquia] = useState<Paroquia | null>(null);
 
+    const load = async () => {
+        getParoquia(pathname?.split('/').pop() || String(id))
+            .then(response => setParoquia(response))
+            .catch(error => console.log(
+                `getParoquia(${id})[error]: ` +
+                error
+            ));
+    }
+
     useEffect(() => {
-        const load = async () => {
-            getParoquia(String(id))
-                .then(response => setParoquia(response))
-                .catch(error => console.log(
-                    `getParoquia(${id})[error]: ` +
-                    error
-                ));
-        }
+        setParoquia(null);
         load();
-    }, [])
+    }, []);
 
     const isNull = (value: any) => value === 'NULL' ? null : value;
 
@@ -65,8 +69,6 @@ export default function ParoquiasScreen() {
             <Social
                 iconName='youtube'
                 href={isNull(paroquia?.redesSociais?.youtube)}
-            />
-
             <Social
                 iconName='globe'
                 href={isNull(paroquia?.urlSite)}
@@ -150,28 +152,51 @@ export default function ParoquiasScreen() {
 
     const Clero = () =>
         <ScrollView margin='$4'>
-            <Text bold>Clero:</Text>
             {
                 paroquia?.cleros &&
-                paroquia?.cleros?.map(
+                <>
+                <Text bold>Clero:</Text>
+                {paroquia?.cleros?.map(
                     clero => <Text key={clero?.nome} pt="$4">{clero?.nome}</Text>
-                )
+                )}
+                </>
+            }
+        </ScrollView>
+
+    const Email = () =>
+        <ScrollView margin='$4'>
+            {
+                paroquia?.email &&
+                <>
+                    <Text bold>Email:</Text>
+                    <Text>{isNull(paroquia?.email)}</Text>
+                </>
             }
         </ScrollView>
 
     return (
-        <View key={paroquia?.id}>
-            <Center justifyContent="center" pt='$10'>
-                <Heading size='md'>{paroquia?.nome}</Heading>
+        <>
+        {
+            !paroquia &&
+                <Center h={"$full"}>
+                    <ActivityIndicator size={"large"}/>
+                </Center>
+        }
+        {
+            paroquia &&
+            <View key={paroquia?.id}>
+                <Center justifyContent="center" pt='$10'>
+                    <Heading size='md'>{paroquia?.nome}</Heading>
 
-                <Secretaria />
+                    <Secretaria/>
 
-                <Missas />
+                    <Missas/>
 
-                <Clero />
+                    <Clero/>
 
-                <Contatos />
+                    <Contatos/>
 
+                    <Email/>
                 <Text bold >{isNull(paroquia?.email) ? paroquia?.email : ''}</Text>
 
 
