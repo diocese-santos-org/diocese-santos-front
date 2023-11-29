@@ -68,14 +68,29 @@ Certifique-se de ter os seguintes itens abaixos estão instalados em sua máquin
 4. Crie um arquivo **.env.local** usando como exemplo o [.env.example](./.env.example) com as informações especificadas nele.
 
 
-5. Usar o backend: Baixar o NGROK extrair e rodar o app gerado.
+5. Usar o backend, existem 2 (duas) opções:
+    ### 1 - Baixar o NGROK extrair e rodar o app gerado.
+	>Com o terminal do aplicativo rodando, digitar o comando: 
+	> ```
+ 	> ngrok.exe http 8080
+ 	> ```
+   	> Após isso, copiar o ip gerado, exemplo:  https://ebfd-2804-431-cfe9-48ed-3d45-c9d5-9851-4cec.ngrok.io
+   	> 	
+	> e colar na variável do arquivo .env.local: EXPO_PUBLIC_API_URL
+	> Com a token gerada na url:`{urlLocal}/token` cole na variável do arquivo .env.local: EXPO_PUBLIC_API_TOKEN
+   
+    ### 2 - Utilizar localhost.run
+	>Com o terminal do aplicativo rodando, abra outro terminal e digite o comando: 
+	> ```
+ 	> ssh -R 80:localhost:8080 nokey@localhost.run
+ 	> ```
+   	> Após isso, copiar o ip gerado, exemplo: https://ea28d87c2470dd.lhr.life
+   	> 	
+	> e colar na variável do arquivo .env.local: EXPO_PUBLIC_API_URL 
+	> Com a token gerada na url:`{urlLocal}/token` cole na variável do arquivo .env.local: EXPO_PUBLIC_API_TOKEN
 
-    Com o terminal do aplicativo rodando, digitar o comando: 
-ngrok.exe http 8080
+Nota: a diferença entre as opções seria que o NGROK dura cerca de 2 horas o servidor. Já o localhost.run, por ser online, dura cerca de 30 minutos.
 
-    Após isso, copiar o ip gerado, exemplo:  https://ebfd-2804-431-cfe9-48ed-3d45-c9d5-9851-4cec.ngrok.io
-
-    e colar na variavel do arquivo .env.local: EXPO_PUBLIC_API_URL
 
 
 ## Uso
