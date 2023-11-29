@@ -9,6 +9,7 @@ Aplicativo da Diocese de Santos com as paróquias mais perto de você, avisos e 
 - [Pré-requisitos](#pré-requisitos)
 - [Instalação](#instalação)
 - [Uso](#uso)
+- [Links Importantes](#links-importantes)
 
 ## Recursos
 
